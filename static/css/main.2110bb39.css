@@ -1,0 +1,2 @@
+.todoListContainer{flex-direction:column;overflow:auto}.todoDetailContainer,.todoListContainer{align-items:center;display:flex;height:600px;width:600px}.innerContainer,.todoDetailContainer{justify-content:center}.innerContainer{align-items:center;display:flex;flex-direction:column;position:relative;text-align:center;width:80%}.todoActions{display:flex;gap:15px;margin-top:30px}.App{display:flex;height:100vh;justify-content:center}
+/*# sourceMappingURL=main.2110bb39.css.map*/
