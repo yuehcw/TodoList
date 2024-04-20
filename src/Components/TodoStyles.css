@@ -1,0 +1,17 @@
+.todoContainer {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.todoListScrollable {
+    overflow: auto;
+}
+
+
+.todoContainerflex {
+    justify-content: center;
+}
