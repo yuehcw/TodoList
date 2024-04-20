@@ -4,7 +4,6 @@ import { Paper, Typography, Button, Box } from "@mui/material";
 import { Modal } from "antd";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
-
 import "./TodoStyles.css";
 import CompletedAnimation from "./CompletedAnimation";
 
@@ -126,7 +125,7 @@ const TodoDetails = ({ todoId, onDelete }) => {
             color="textSecondary"
             component="span"
             sx={{
-              fontSize: "1.45rem", // Custom font size
+              fontSize: "1.45rem",
             }}
           >
             <strong>{todo.completed ? "Completed" : "Not Completed"}</strong>
