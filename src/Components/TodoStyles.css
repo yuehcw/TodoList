@@ -1,17 +1,32 @@
-.todoContainer {
+.todoListContainer {
     width: 600px;
     height: 600px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    text-align: center;
-}
-
-.todoListScrollable {
     overflow: auto;
 }
 
-
-.todoContainerflex {
+.todoDetailContainer {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 600px;
+}
+
+.innerContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 80%;
+    position: relative;
+}
+
+.todoActions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
 }

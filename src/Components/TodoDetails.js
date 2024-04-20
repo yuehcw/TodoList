@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { fetchTodo, updateTodo } from "../Service/service";
-import { Paper, Typography, Button } from "@mui/material";
+import { Paper, Typography, Button, Box } from "@mui/material";
+import { Modal } from "antd";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ErrorIcon from "@mui/icons-material/Error";
+
 import "./TodoStyles.css";
+import CompletedAnimation from "./CompletedAnimation";
 
 const TodoDetails = ({ todoId, onDelete }) => {
   const [todo, setTodo] = useState(null);
@@ -54,6 +59,21 @@ const TodoDetails = ({ todoId, onDelete }) => {
     }
   };
 
+  const showDeleteConfirm = () => {
+    Modal.confirm({
+      title: "Are you sure delete this task?",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        handleDelete();
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+
   const handleDelete = () => {
     onDelete(todo.id);
     setTodo(null);
@@ -64,34 +84,74 @@ const TodoDetails = ({ todoId, onDelete }) => {
   }
 
   return (
-    <Paper elevation={10} className="todoContainer todoContainerflex">
-      <Typography variant="h6" gutterBottom>
-        Title: {todo.title}
-      </Typography>
-      <Typography variant="h6" gutterBottom>
-        User ID: {todo.id}
-      </Typography>
-      <Typography color="textSecondary" gutterBottom>
-        {todo.completed ? "Completed" : "Not Completed"}
-      </Typography>
-      <div>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={() => handleDelete()}
+    <Paper elevation={10} className="todoDetailContainer">
+      <div className="innerContainer">
+        {todo.completed && (
+          <CompletedAnimation
+            isCompleted={todo.completed}
+            style={{
+              position: "absolute",
+            }}
+          />
+        )}
+        <Typography
+          variant="subtitle1"
+          gutterBottom
+          sx={{ textAlign: "left", width: "100%" }}
         >
-          Delete
-        </Button>
-        {!todo.completed && (
+          <strong>Title:</strong> {todo.title}
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          gutterBottom
+          sx={{ textAlign: "left", width: "100%" }}
+        >
+          <strong>User Id:</strong> {todo.id}
+        </Typography>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          sx={{
+            paddingTop: "8px",
+          }}
+        >
+          {todo.completed ? (
+            <CheckCircleIcon color="success" sx={{ marginRight: "4px" }} />
+          ) : (
+            <ErrorIcon color="error" sx={{ marginRight: "4px" }} />
+          )}
+          <Typography
+            variant="subtitle1"
+            color="textSecondary"
+            component="span"
+            sx={{
+              fontSize: "1.45rem", // Custom font size
+            }}
+          >
+            <strong>{todo.completed ? "Completed" : "Not Completed"}</strong>
+          </Typography>
+        </Box>
+
+        <div className="todoActions">
           <Button
             variant="contained"
-            color="success"
-            onClick={() => handleComplete()}
-            style={{ marginLeft: 8 }}
+            color="error"
+            onClick={() => showDeleteConfirm()}
           >
-            Completed
+            Delete
           </Button>
-        )}
+          {!todo.completed && (
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => handleComplete()}
+              style={{ marginLeft: 8 }}
+            >
+              Completed
+            </Button>
+          )}
+        </div>
       </div>
     </Paper>
   );
